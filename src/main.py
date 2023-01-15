@@ -1,19 +1,7 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-class Main:
-    def is_prime(number):
-        for element in range(2, number):
-            if number % element == 0:
-                return False
-        return True
-
-
+from DataReader import DataReader
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print("Hello world")
+    dataReader = DataReader()
+    dataReader.read_CBOE_csv_data("test/resources/UnderlyingOptionsEODCalcs_2016-06-01.csv")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
