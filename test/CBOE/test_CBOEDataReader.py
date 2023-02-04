@@ -2,11 +2,11 @@ import math
 import unittest
 import numpy as np
 
-from src.DataReader import DataReader
+from src.CBOE import CBOEDataReader
 
 class Test(unittest.TestCase):
     def testgetOptionContractsByCondition(self):
-        cboeDataReader = DataReader.CBOEDataReader()
+        cboeDataReader = CBOEDataReader.CBOEDataReader()
         optionsChain = cboeDataReader.readCSVFile("test/resources/UnderlyingOptionsEODCalcs_2016-06-01.csv")
 
         optionContracts = cboeDataReader.getOptionContractsByCondition(optionsChain,
