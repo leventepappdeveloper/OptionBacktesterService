@@ -1,149 +1,167 @@
 import pandas
 
-class CBOEDataReader:
-    def readCSVFile(self, path_to_file : str) -> pandas.DataFrame:
-        return pandas.read_csv(path_to_file)
 
-    def getOptionContractsByCondition(self,
-                                      optionsChain : pandas.DataFrame,
-                                      underlying_symbol : str = "",
-                                      quote_date : str = "",
-                                      root : str = "",
-                                      expiration : str = "",
-                                      strike : float = -1.0,
-                                      option_type : str = "",
-                                      open : float = -1.0,
-                                      high : float = -1.0,
-                                      low : float = -1.0,
-                                      close : float = -1.0,
-                                      trade_volume : int = -1,
-                                      bid_size_1545 : int = -1,
-                                      bid_1545 : float = -1.0,
-                                      ask_size_1545 : int = -1,
-                                      ask_1545 : float = -1.0,
-                                      underlying_bid_1545 : float = -1.0,
-                                      underlying_ask_1545 : float = -1.0,
-                                      implied_underlying_price_1545 : float = -1.0,
-                                      active_underlying_price_1545 : float = -1.0,
-                                      implied_volatility_1545 : float = -1.0,
-                                      delta_1545 : float = -1.0,
-                                      gamma_1545 : float = -1.0,
-                                      theta_1545 : float = -1.0,
-                                      vega_1545 : float = -1.0,
-                                      rho_1545 : float = -1.0,
-                                      bid_size_eod : int = -1,
-                                      bid_eod : float = -1.0,
-                                      ask_size_eod : int = -1,
-                                      ask_eod : float = -1.0,
-                                      underlying_bid_eod : float = -1.0,
-                                      underlying_ask_eod : float = -1.0,
-                                      vwap : float = -1.0,
-                                      open_interest : int = -1,
-                                      delivery_code : float = -1.0,) -> pandas.DataFrame:
+def readCSVFile(path_to_file : str) -> pandas.DataFrame:
+    return pandas.read_csv(path_to_file)
 
-        optionContracts = optionsChain
 
-        if len(str(underlying_symbol)) > 0:
-            optionContracts = optionContracts.loc[(optionContracts["underlying_symbol"] == underlying_symbol)]
+def getoptionsContractsByCondition(options_chain : pandas.DataFrame,
+                                   underlying_symbol : str = "",
+                                   quote_date : str = "",
+                                   root : str = "",
+                                   expiration : str = "",
+                                   strike : float = -1.0,
+                                   option_type : str = "",
+                                   open : float = -1.0,
+                                   high : float = -1.0,
+                                   low : float = -1.0,
+                                   close : float = -1.0,
+                                   trade_volume : int = -1,
+                                   bid_size_1545 : int = -1,
+                                   bid_1545 : float = -1.0,
+                                   ask_size_1545 : int = -1,
+                                   ask_1545 : float = -1.0,
+                                   underlying_bid_1545 : float = -1.0,
+                                   underlying_ask_1545 : float = -1.0,
+                                   implied_underlying_price_1545 : float = -1.0,
+                                   active_underlying_price_1545 : float = -1.0,
+                                   implied_volatility_1545 : float = -1.0,
+                                   delta_1545 : float = -1.0,
+                                   gamma_1545 : float = -1.0,
+                                   theta_1545 : float = -1.0,
+                                   vega_1545 : float = -1.0,
+                                   rho_1545 : float = -1.0,
+                                   bid_size_eod : int = -1,
+                                   bid_eod : float = -1.0,
+                                   ask_size_eod : int = -1,
+                                   ask_eod : float = -1.0,
+                                   underlying_bid_eod : float = -1.0,
+                                   underlying_ask_eod : float = -1.0,
+                                   vwap : float = -1.0,
+                                   open_interest : int = -1,
+                                   delivery_code : float = -1.0,) -> pandas.DataFrame:
 
-        if len(str(quote_date)) > 0:
-            optionContracts = optionContracts.loc[(optionContracts["quote_date"] == quote_date)]
+    option_contracts = options_chain
 
-        if len(str(root)) > 0:
-            optionContracts = optionContracts.loc[(optionContracts["root"] == root)]
+    if len(str(underlying_symbol)) > 0:
+        option_contracts = option_contracts.loc[(option_contracts["underlying_symbol"] == underlying_symbol)]
 
-        if len(str(expiration)) > 0:
-            optionContracts = optionContracts.loc[(optionContracts["expiration"] == expiration)]
+    if len(str(quote_date)) > 0:
+        option_contracts = option_contracts.loc[(option_contracts["quote_date"] == quote_date)]
 
-        if strike != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["strike"] == strike)]
+    if len(str(root)) > 0:
+        option_contracts = option_contracts.loc[(option_contracts["root"] == root)]
 
-        if len(option_type) > 0:
-            optionContracts = optionContracts.loc[(optionContracts["option_type"] == option_type)]
+    if len(str(expiration)) > 0:
+        option_contracts = option_contracts.loc[(option_contracts["expiration"] == expiration)]
 
-        if open != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["open"] == open)]
+    if strike != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["strike"] == strike)]
 
-        if high != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["high"] == high)]
+    if len(option_type) > 0:
+        option_contracts = option_contracts.loc[(option_contracts["option_type"] == option_type)]
 
-        if low != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["low"] == low)]
+    if open != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["open"] == open)]
 
-        if close != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["close"] == close)]
+    if high != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["high"] == high)]
 
-        if trade_volume != -1:
-            optionContracts = optionContracts.loc[(optionContracts["trade_volume"] == trade_volume)]
+    if low != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["low"] == low)]
 
-        if bid_size_1545 != -1:
-            optionContracts = optionContracts.loc[(optionContracts["bid_size_1545"] == bid_size_1545)]
+    if close != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["close"] == close)]
 
-        if bid_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["bid_1545"] == bid_1545)]
+    if trade_volume != -1:
+        option_contracts = option_contracts.loc[(option_contracts["trade_volume"] == trade_volume)]
 
-        if ask_size_1545 != -1:
-            optionContracts = optionContracts.loc[(optionContracts["ask_size_1545"] == ask_size_1545)]
+    if bid_size_1545 != -1:
+        option_contracts = option_contracts.loc[(option_contracts["bid_size_1545"] == bid_size_1545)]
 
-        if ask_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["ask_1545"] == ask_1545)]
+    if bid_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["bid_1545"] == bid_1545)]
 
-        if underlying_bid_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["underlying_bid_1545"] == underlying_bid_1545)]
+    if ask_size_1545 != -1:
+        option_contracts = option_contracts.loc[(option_contracts["ask_size_1545"] == ask_size_1545)]
 
-        if underlying_ask_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["underlying_ask_1545"] == underlying_ask_1545)]
+    if ask_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["ask_1545"] == ask_1545)]
 
-        if implied_underlying_price_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["implied_underlying_price_1545"] == implied_underlying_price_1545)]
+    if underlying_bid_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["underlying_bid_1545"] == underlying_bid_1545)]
 
-        if active_underlying_price_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["active_underlying_price_1545"] == active_underlying_price_1545)]
+    if underlying_ask_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["underlying_ask_1545"] == underlying_ask_1545)]
 
-        if implied_volatility_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["implied_volatility_1545"] == implied_volatility_1545)]
+    if implied_underlying_price_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["implied_underlying_price_1545"] == implied_underlying_price_1545)]
 
-        if delta_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["delta_1545"] == delta_1545)]
+    if active_underlying_price_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["active_underlying_price_1545"] == active_underlying_price_1545)]
 
-        if gamma_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["gamma_1545"] == gamma_1545)]
+    if implied_volatility_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["implied_volatility_1545"] == implied_volatility_1545)]
 
-        if theta_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["theta_1545"] == theta_1545)]
+    if delta_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["delta_1545"] == delta_1545)]
 
-        if vega_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["vega_1545"] == vega_1545)]
+    if gamma_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["gamma_1545"] == gamma_1545)]
 
-        if rho_1545 != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["rho_1545"] == rho_1545)]
+    if theta_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["theta_1545"] == theta_1545)]
 
-        if bid_size_eod != -1:
-            optionContracts = optionContracts.loc[(optionContracts["bid_size_eod"] == bid_size_eod)]
+    if vega_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["vega_1545"] == vega_1545)]
 
-        if bid_eod != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["bid_eod"] == bid_eod)]
+    if rho_1545 != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["rho_1545"] == rho_1545)]
 
-        if ask_size_eod != -1:
-            optionContracts = optionContracts.loc[(optionContracts["ask_size_eod"] == ask_size_eod)]
+    if bid_size_eod != -1:
+        option_contracts = option_contracts.loc[(option_contracts["bid_size_eod"] == bid_size_eod)]
 
-        if ask_eod != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["ask_eod"] == ask_eod)]
+    if bid_eod != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["bid_eod"] == bid_eod)]
 
-        if underlying_bid_eod != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["underlying_bid_eod"] == underlying_bid_eod)]
+    if ask_size_eod != -1:
+        option_contracts = option_contracts.loc[(option_contracts["ask_size_eod"] == ask_size_eod)]
 
-        if underlying_ask_eod != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["underlying_ask_eod"] == underlying_ask_eod)]
+    if ask_eod != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["ask_eod"] == ask_eod)]
 
-        if vwap != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["vwap"] == vwap)]
+    if underlying_bid_eod != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["underlying_bid_eod"] == underlying_bid_eod)]
 
-        if open_interest != -1:
-            optionContracts = optionContracts.loc[(optionContracts["open_interest"] == open_interest)]
+    if underlying_ask_eod != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["underlying_ask_eod"] == underlying_ask_eod)]
 
-        if delivery_code != -1.0:
-            optionContracts = optionContracts.loc[(optionContracts["delivery_code"] == delivery_code)]
+    if vwap != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["vwap"] == vwap)]
 
-        return optionContracts
+    if open_interest != -1:
+        option_contracts = option_contracts.loc[(option_contracts["open_interest"] == open_interest)]
 
+    if delivery_code != -1.0:
+        option_contracts = option_contracts.loc[(option_contracts["delivery_code"] == delivery_code)]
+
+    return option_contracts
+
+
+def getClosestStrikeToDelta(options_chain : pandas.DataFrame, option_type : str, expiration : str, target_option_delta : float) -> pandas.DataFrame:
+
+    # Get all option contracts for the given type and expiration in the given chain
+    option_contracts = getoptionsContractsByCondition(options_chain=options_chain,
+                                                      option_type=option_type,
+                                                      expiration=expiration)
+
+    # Get all available deltas from all option_contracts
+    available_option_deltas = option_contracts.loc[:, "delta_1545"]
+
+    absolute_distances_from_target = available_option_deltas.apply(lambda x: abs(x - target_option_delta))
+
+    min_distance_from_target = min(absolute_distances_from_target)
+
+    min_distance_from_target_index = absolute_distances_from_target[absolute_distances_from_target == min_distance_from_target].index[0]
+
+    return options_chain.iloc[[min_distance_from_target_index]]
